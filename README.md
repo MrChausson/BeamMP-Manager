@@ -1,2 +1,11 @@
 # BeamMP-Manager
-A WebApp to manage your BeamMP server made with Svelte !
+
+This is a simple manager for BeamMP servers.
+
+What features are available:
+- [x] Start server
+- [x] Stop server
+- [x] Restart server
+- [x] Update server
+- [x] Check server status
+- [x] Upload resources
