@@ -1,8 +1,8 @@
-import {ConfigManager} from '$lib/ConfigManager';
+import { ConfigManager } from '$lib/ConfigManager';
 import { readdir, stat } from 'node:fs/promises';
 import { join, extname } from 'node:path';
-import { createWriteStream } from 'node:fs';
-import { pipeline } from 'node:stream';
+import { formidable } from 'formidable';
+
 
 async function getResources(folder: string)
 {
@@ -23,7 +23,10 @@ async function getResources(folder: string)
 }
 
 async function saveResource(folder: string, file: any, filename: string) {
-    const fileToWrite = join(join(ConfigManager.getConfig().resourceFolder, folder), file.name);
+    console.log(filename);
+    console.log(ConfigManager.getConfig());
+    const fileToWrite = join(join(ConfigManager.getConfig().resourceFolder, folder), filename);
+    console.log(fileToWrite);
     const reader = file;
 
     await Bun.write(fileToWrite, reader);
@@ -31,9 +34,7 @@ async function saveResource(folder: string, file: any, filename: string) {
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url }) {
-    console.log(url);
     const folder = url.pathname.split("/").pop();
-    console.log(folder);
     if (!(folder == "Client" || folder == "Server")) {
         return new Response(JSON.stringify({
             success: false
@@ -45,7 +46,6 @@ export async function GET({ url }) {
         });
     }
     const resources_list = await getResources(folder);
-    console.log(resources_list);
     return new Response(JSON.stringify({
         list: resources_list
     }), {
@@ -69,29 +69,13 @@ export async function POST({ request, params }) {
             status: 500
         });
     }
-    const file = await request.text();
-    // console.log(request);
-    // let formData;
-    // try {
-    //     formData = await request.formData();
-    // } catch (e) {
-    //     console.log(e);
-    //     return new Response(JSON.stringify({
-    //         success: false,
-    //         message: "Wrong data format"
-    //     }), {
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         status: 500
-    //     });
-    // }
-    // console.log(formData);
-    // const file = formData.getAll('file');
-    console.log(file)
-    if (!file) {
+    const formData = await request.formData();
+    const file = formData.get("file");
+    const filename = formData.get("filename");
+    if (!filename || !file) {
         return new Response(JSON.stringify({
-            success: false
+            success: false,
+            message: "Missing filename or file"
         }), {
             headers: {
                 'Content-Type': 'application/json'
@@ -99,9 +83,8 @@ export async function POST({ request, params }) {
             status: 500
         });
     }
-
     // Save file
-    saveResource(folder, file, "test.zip");
+    saveResource(folder, file, filename.toString());
 
     return new Response(JSON.stringify({
         success: true,

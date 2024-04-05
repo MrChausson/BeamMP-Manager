@@ -17,6 +17,7 @@
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@types/bun": "^1.0.12",
+    "@types/formidable": "^3.4.5",
     "smui-theme": "^7.0.0-beta.18",
     "svelte": "^4.2.7",
     "svelte-adapter-bun": "^0.5.2",
@@ -26,6 +27,5 @@
     "vite": "^5.0.3"
   },
   "type": "module",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
