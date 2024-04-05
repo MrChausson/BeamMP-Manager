@@ -1,0 +1,65 @@
+@use 'sass:color';
+
+@use '@material/theme/color-palette';
+
+// Svelte Colors!
+@use '@material/theme/index' as theme with ($primary: #ff3e00,
+    $secondary: #676778,
+    $surface: #fff,
+    $background: #fff,
+    $error: color-palette.$red-900 );
+
+    
+@use '@material/button/mixins' as button;
+    
+@import 'typography.scss';
+
+html,
+body {
+    background-color: theme.$surface;
+    color: theme.$on-surface;
+}
+
+a {
+    color: #40b3ff;
+}
+
+a:visited {
+    color: color.scale(#40b3ff, $lightness: -35%);
+}
+
+.start-button {
+    &.mdc-button {
+        @include button.ink-color(color-palette.$green-600);
+    }
+
+    &.mdc-button--unelevated,
+    &.mdc-button--raised {
+        @include button.filled-accessible(color-palette.$green-600);
+    }
+
+    &.mdc-button--outlined {
+        @include button.outline-color(color-palette.$green-600);
+        @include button.ink-color(color-palette.$green-600);
+    }
+
+    @include button.ripple-states(color-palette.$green-600);
+}
+
+.restart-button {
+    &.mdc-button {
+        @include button.ink-color(color-palette.$yellow-600);
+    }
+
+    &.mdc-button--unelevated,
+    &.mdc-button--raised {
+        @include button.filled-accessible(color-palette.$yellow-600);
+    }
+
+    &.mdc-button--outlined {
+        @include button.outline-color(color-palette.$yellow-600);
+        @include button.ink-color(color-palette.$yellow-600);
+    }
+
+    @include button.ripple-states(color-palette.$yellow-600);
+}
