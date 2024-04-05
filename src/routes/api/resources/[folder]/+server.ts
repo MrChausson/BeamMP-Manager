@@ -1,11 +1,9 @@
 import { ConfigManager } from '$lib/ConfigManager';
-import { readdir, stat } from 'node:fs/promises';
+import { readdir, stat, unlink } from 'node:fs/promises';
 import { join, extname } from 'node:path';
-import { formidable } from 'formidable';
 
 
-async function getResources(folder: string)
-{
+async function getResources(folder: string) {
     const resourcefolder = join(ConfigManager.getConfig().resourceFolder, folder);
     let resourcesList = [];
     const files = await readdir(resourcefolder);
@@ -32,6 +30,11 @@ async function saveResource(folder: string, file: any, filename: string) {
     await Bun.write(fileToWrite, reader);
 }
 
+async function deleteResource(folder: string, filename: string) {
+    const fileToDelete = join(ConfigManager.getConfig().resourceFolder, folder, filename.toString());
+    await unlink(fileToDelete);
+}
+
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url }) {
     const folder = url.pathname.split("/").pop();
@@ -56,6 +59,43 @@ export async function GET({ url }) {
     });
 }
 
+export async function DELETE({ request, params }) {
+    const folder = params.folder;
+    if (!(folder == "Client" || folder == "Server")) {
+        return new Response(JSON.stringify({
+            success: false,
+            message: "Invalid folder"
+        }), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            status: 500
+        });
+    }
+    const data = await request.json()
+    const filename = data.filename;
+    if (!filename || filename == "" || !filename.endsWith('.zip')) {
+        return new Response(JSON.stringify({
+            success: false,
+            message: "Missing filename"
+        }), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            status: 500
+        });
+    }
+    await deleteResource(folder, filename);
+    return new Response(JSON.stringify({
+        success: true,
+    }), {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        status: 200
+    });
+}
+
 export async function POST({ request, params }) {
     // Check if param is a file ending in .zip
     const folder = params.folder;
@@ -72,6 +112,7 @@ export async function POST({ request, params }) {
     const formData = await request.formData();
     const file = formData.get("file");
     const filename = formData.get("filename");
+    console.log(file);
     if (!filename || !file) {
         return new Response(JSON.stringify({
             success: false,
