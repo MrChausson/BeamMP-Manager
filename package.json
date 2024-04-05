@@ -1,29 +1,31 @@
 {
-    "name": "beammp-manager",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "dev": "bunx --bun vite",
-        "build": "bunx --bun vite build",
-        "preview": "bunx --bun vite preview",
-        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-        "prepare": "npm run smui-theme",
-        "smui-theme": "smui-theme compile static/smui.css -i src/theme"
-    },
-    "devDependencies": {
-        "@smui/button": "^7.0.0-beta.18",
-        "@sveltejs/adapter-auto": "^3.0.0",
-        "@sveltejs/kit": "^2.0.0",
-        "@sveltejs/vite-plugin-svelte": "^3.0.0",
-        "@types/bun": "^1.0.12",
-        "smui-theme": "^7.0.0-beta.18",
-        "svelte": "^4.2.7",
-        "svelte-adapter-bun": "^0.5.2",
-        "svelte-check": "^3.6.0",
-        "tslib": "^2.4.1",
-        "typescript": "^5.0.0",
-        "vite": "^5.0.3"
-    },
-    "type": "module"
+  "name": "beammp-manager",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun vite build",
+    "preview": "bunx --bun vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "prepare": "npm run smui-theme",
+    "smui-theme": "smui-theme compile static/smui.css -i src/theme"
+  },
+  "devDependencies": {
+    "@smui/button": "^7.0.0-beta.18",
+    "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@types/bun": "^1.0.12",
+    "smui-theme": "^7.0.0-beta.18",
+    "svelte": "^4.2.7",
+    "svelte-adapter-bun": "^0.5.2",
+    "svelte-check": "^3.6.0",
+    "tslib": "^2.4.1",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.3"
+  },
+  "type": "module",
+  "dependencies": {
+  }
 }

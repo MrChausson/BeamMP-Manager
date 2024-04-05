@@ -21,3 +21,5 @@ symlink-from
 .idea/
 bun.lockb
 .vscode
+server
+node_modules
