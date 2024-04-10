@@ -1,0 +1,11 @@
+[General]
+AuthKey = ''
+Debug = false
+Description = 'Get your free server on hosting.chausson.services'
+Map = '/levels/gridmap_v2/info.json'
+MaxCars = 1
+MaxPlayers = 10
+Name = 'BeamMP Server - Free Servers on hosting.chausson.services !'
+Port = 30814
+Private = false
+ResourceFolder = 'Resources'
