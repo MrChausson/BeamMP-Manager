@@ -53,6 +53,31 @@ export async function GET() {
     });
 }
 
-export async function POST() {
-    
+export async function POST({request}) {
+    // this will update the config with the new content
+    const config = ConfigManager.getConfig();
+    const body = await request.text();
+
+    try {
+        await writeFile(config.serverConfig, body);
+    } catch (err) {
+        console.error(`Error writing to file ${config.serverConfig}:`, err);
+        return new Response(JSON.stringify({
+            success: false
+        }), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            status: 500
+        });
+    }
+
+    return new Response(JSON.stringify({
+        success: true
+    }), {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        status: 200
+    });
 }
