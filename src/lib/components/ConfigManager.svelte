@@ -8,13 +8,15 @@
 
     let config = writable("");
     let tempConfig = "";
-    let rows = $config.split('\n').length;
+    let rows = 5;
 
     async function getConfig() {
         const response = await fetch("/api/config");
         if (response.ok) {
             $config = await response.text();
-            tempConfig = $config;        }
+            tempConfig = $config;
+            rows = $config.split('\n').length;
+        }
     }
 
     onMount(async () => {
@@ -52,10 +54,11 @@
     helperLine$style="width: 100%;"
     textarea
     bind:value={tempConfig}
-    label="Label"
+    label="Config"
     input$resizable={true}
     input$rows={rows}
 ></Textfield>
+<div class=buttons>
 <Button class="start-button" on:click={applyConfig} variant="raised">
     <Label>Apply new config</Label>
     <Icon class="material-icons">download_icon</Icon>
@@ -64,3 +67,10 @@
     <Label>Reset config</Label>
     <Icon class="material-icons">warning_amber_icon</Icon>
 </Button>
+</div>
+
+<style>
+    .buttons {
+        margin-top: 1em;
+    }
+</style>
