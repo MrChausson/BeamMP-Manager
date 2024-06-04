@@ -1,10 +1,9 @@
 <script lang="ts">
+    import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
     import Textfield from "@smui/textfield";
     import Button, { Label, Icon } from "@smui/button";
-
-    import HelperText from "@smui/textfield/helper-text";
 
     let config = writable("");
     let tempConfig = "";
@@ -49,25 +48,32 @@
     }
 </script>
 
-<Textfield
-    style="width: 100%;"
-    helperLine$style="width: 100%;"
-    textarea
-    bind:value={tempConfig}
-    label="Config"
-    input$resizable={true}
-    input$rows={rows}
-></Textfield>
-<div class=buttons>
-<Button class="start-button" on:click={applyConfig} variant="raised">
-    <Label>Apply new config</Label>
-    <Icon class="material-icons">download_icon</Icon>
-</Button>
-<Button variant="raised" on:click={resetConfig}>
-    <Label>Reset config</Label>
-    <Icon class="material-icons">warning_amber_icon</Icon>
-</Button>
-</div>
+<Accordion>
+    <Panel>
+        <Header>Config Manager</Header>
+        <Content>
+            <Textfield
+                style="width: 100%;"
+                helperLine$style="width: 100%;"
+                textarea
+                bind:value={tempConfig}
+                label="Config"
+                input$resizable={true}
+                input$rows={rows}
+            ></Textfield>
+            <div class=buttons>
+                <Button class="start-button" on:click={applyConfig} variant="raised">
+                    <Label>Apply new config</Label>
+                    <Icon class="material-icons">download_icon</Icon>
+                </Button>
+                <Button variant="raised" on:click={resetConfig}>
+                    <Label>Reset config</Label>
+                    <Icon class="material-icons">warning_amber_icon</Icon>
+                </Button>
+            </div>
+        </Content>
+    </Panel>
+</Accordion>
 
 <style>
     .buttons {

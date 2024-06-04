@@ -16,7 +16,9 @@ I have created this in order to go with my [BeamMP Hosting service](https://host
 - [x] Check server status
 - [x] Edit config
 - [x] Update BeamMP server with latest version
-- [ ] Being able to see logs
+- [x] Being able to see logs
+- [ ] Add a progress bar for every action
+- [ ] Improve styling
 
 ## How to install
 

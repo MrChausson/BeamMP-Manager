@@ -14,7 +14,7 @@ export class ConfigManager {
             resourceFolder = `${env.PUBLIC_SERVER_FOLDER}/Resources`;
             serverConfig = `${env.PUBLIC_SERVER_FOLDER}/ServerConfig.toml`;
             serverExecutable = `${env.PUBLIC_SERVER_FOLDER}/BeamMP-Server`;
-            logFile = `${env.PUBLIC_SERVER_FOLDER}/server.log`;
+            logFile = `${env.PUBLIC_SERVER_FOLDER}/Server.log`;
         }
 
         return {

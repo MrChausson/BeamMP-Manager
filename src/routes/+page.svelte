@@ -4,6 +4,7 @@
     import ServerState from "$lib/components/ServerState.svelte";
     import ServerInstaller from "$lib/components/ServerInstaller.svelte";
     import ConfigManager from "$lib/components/ConfigManager.svelte";
+    import LogsViewer from '$lib/components/LogsViewer.svelte';
 </script>
 
 <SystemButtons />
@@ -15,3 +16,5 @@
 <ResourcesList />
 
 <ConfigManager />
+
+<LogsViewer />
