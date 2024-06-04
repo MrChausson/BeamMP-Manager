@@ -1,6 +1,6 @@
 
 async function getBeamMPState(): Promise<string> {
-    const proc = Bun.spawn(["/usr/bin/systemctl", "is-active", "beammp"])
+    const proc = Bun.spawn(["/usr/bin/systemctl", "--user", "is-active", "beammp"])
     let res = await new Response(proc.stdout).text();
     //remove trailing newline
     res = res.replace(/\n$/, '');

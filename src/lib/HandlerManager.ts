@@ -1,5 +1,14 @@
 export class HandlerManager {
 
+    static async handleInstall() {
+        const response = await fetch('/api/install', { method: 'POST' });
+        if (response.ok) {
+            const data = await response.json();
+            return data.success == true;
+        }
+        throw new Error('Failed to make request');
+    }
+
     static async handleRestart() {
         const response = await fetch('/api/restart', { method: 'POST' });
         if (response.ok) {
