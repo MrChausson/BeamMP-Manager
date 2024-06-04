@@ -15,7 +15,8 @@ I have created this in order to go with my [BeamMP Hosting service](https://host
 - [x] Upload resources (still needs a progress bar)
 - [x] Check server status
 - [x] Edit config
-- [ ] Update BeamMP server with latest version
+- [x] Update BeamMP server with latest version
+- [ ] Being able to see logs
 
 ## How to install
 
